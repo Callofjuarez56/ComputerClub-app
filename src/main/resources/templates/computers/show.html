@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Show</title>
+</head>
+<body>
+<!--<p th:text="${computers.getComputerNumber() + ', ' + computers.getPerson()}">VALUE</p>-->
+
+<div th:if="${person}">
+    <span>Currently at the computer: </span> <span th:text="${person.getName()}">Person Name</span>
+
+    <form th:method="PATCH" th:action="@{/computers/{id}/release(id=${computers.getId()})}">
+        <input type="submit" value="Release this computer"/>
+    </form>
+</div>
+</br>
+<div th:if="${people}">
+    <span>This computer is free. Who should I assign it to?</span>
+    <form th:method="PATCH" th:action="@{/computers/{id}/assign(id=${computers.getId()})}">
+        <label for="person">Select a person</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}">
+            </option>
+        </select>
+        <input type="submit" value="Assign computer"/>
+    </form>
+</div>
+
+<hr/>
+
+
+<form th:method="GET" th:if="${computers.getPerson() == null}" th:action="@{/computers/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+
+<form th:method="DELETE" th:if="${computers.getPerson() == null}" th:action="@{/computers/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br>
+<a href="index.html" th:href="@{/computers/index}" class="btn btn-large btn-success">Return to computer panel</a>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div th:each="console : ${consoles}">
+    <a th:href="@{/consoles/{id}(id=${console.getId()})}"
+       th:text="${console.getConsoleName()}">consoles</a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="new.html" th:href="@{/consoles/new}" class="btn btn-large btn-success">Add a new consoles</a>
+<br/>
+<a href="index.html" th:href="@{/people}" class="btn btn-large btn-success">
+    Do you want to return to the admin panel?</a>
+
+</body>
+</html>

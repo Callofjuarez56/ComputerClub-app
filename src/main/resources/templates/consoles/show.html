@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Show</title>
+</head>
+<body>
+
+<div th:if="${person}">
+    <span>Currently at the console: </span> <span th:text="${person.getName()}">Person Name</span>
+
+    <form th:method="PATCH" th:action="@{/consoles/{id}/release(id=${consoles.getId()})}">
+        <input type="submit" value="Release this console"/>
+    </form>
+</div>
+</br>
+<div th:if="${people}">
+    <span>This console is free. Who should I assign it to?</span>
+    <form th:method="PATCH" th:action="@{/consoles/{id}/assign(id=${consoles.getId()})}">
+        <label for="person">Select a person</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}">
+            </option>
+        </select>
+        <input type="submit" value="Assign console"/>
+    </form>
+</div>
+
+<hr/>
+
+
+<form th:method="GET" th:if="${consoles.getPerson() == null}" th:action="@{/consoles/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Edit"/>
+</form>
+
+<form th:method="DELETE" th:if="${consoles.getPerson() == null}" th:action="@{/consoles/{id}(id=${person.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br>
+<a href="index.html" th:href="@{/consoles/index}" class="btn btn-large btn-success">Return to console panel</a>
+
+</body>
+</html>

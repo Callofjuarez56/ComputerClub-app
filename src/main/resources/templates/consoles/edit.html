@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update console</title>
+</head>
+<body>
+<a>Change the console name</a>
+
+<form th:method="PATCH" th:action="@{/consoles/{id}(id=${console.getId()})}" th:object="${console}">
+    <label for="consoleName"></label>
+    <input type="text" th:field="*{consoleName}" id="consoleName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('consoleName')}" th:errors="*{consoleName}">Console name Error</div>
+    <br/>
+    <input type="submit" value="Edit!"/>
+</form>
+
+</body>
+</html>

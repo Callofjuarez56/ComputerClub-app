@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div th:each="person : ${people}">
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="${person.getName() + ', ' + person.getAge()}">user</a>
+</div>
+
+<br/>
+<hr/>
+
+
+<a href="new.html" th:href="@{/people/new}" class="btn btn-large btn-success">Create new person</a>
+<br/>
+<br/>
+<a href="index. html" th:href="@{/computers/index}" class="btn btn-large btn-success">View all computers</a>
+<br/>
+<br/>
+<a href="index.html" th:href="@{/consoles/index}" class="btn btn-large btn-success">View all consoles</a>
+</body>
+</html>

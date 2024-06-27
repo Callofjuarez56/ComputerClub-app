@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New console</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/consoles}" th:object="${console}">
+    <label for="consoleName">Enter your console name: </label>
+    <input type="text" th:field="*{consoleName}" id="consoleName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('consoleName')}" th:errors="*{consoleName}">Console name Error</div>
+    <br/>
+    <input type="submit" value="Добавить!"/>
+</form>
+
+</body>
+</html>

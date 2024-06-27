@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update computer</title>
+</head>
+<body>
+<a>Change the computer number</a>
+
+<form th:method="PATCH" th:action="@{/computers/{id}(id=${computer.getId()})}" th:object="${computer}">
+    <label for="computerNumber"></label>
+    <input type="text" th:field="*{computerNumber}" id="computerNumber"/>
+    <div style="color:red" th:if="${#fields.hasErrors('computerNumber')}" th:errors="*{computerNumber}">Computer number Error</div>
+    <br/>
+    <input type="submit" value="Edit!"/>
+</form>
+
+</body>
+</html>
